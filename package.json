@@ -2,12 +2,17 @@
   "name": "descriptiongenerator",
   "version": "1.0.0",
   "main": "index.js",
-"type": "module.js",
+  "type": "module",
   "scripts": {
     "start": "node index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "groq-sdk": "^0.37.0"
+  }
 }
