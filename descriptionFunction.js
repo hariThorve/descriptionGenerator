@@ -39,34 +39,48 @@ const input = {
 
 
 const groq = new Groq({apiKey: process.env.DESCRIPTION_GENERATOR_API});
-const chatCompletion = await groq.chat.completions.create({
-  "messages": [
-    {
-        "role": "system",
-        "content": 
-        `You are responsible to create a short and precise Job Description
-        based on the input data, which will contain information regarding job post.
-        Keep it simple in JSON format in such format {description: "your output"}, 
-        dont create the description in markdown format.
-        It is mandatory to have json output. Explain the Job role and responsibilities,
-        so that the candidate would understand properly.
-        `
-    },
-    {
-      "role": "user",
-      "content": `Job details : ${JSON.stringify(input)}`
-    }
-  ],
-  "model": "openai/gpt-oss-120b",
-  "temperature": 1,
-  "max_completion_tokens": 1000,
-  "top_p": 1,
-  "stream": true,
-  "reasoning_effort": "medium",
-  "stop": null
-});
 
-for await (const chunk of chatCompletion) {
-  process.stdout.write(chunk.choices[0]?.delta?.content || '');
-}
+export async function generate_description(data){
+
+  const chatCompletion = await groq.chat.completions.create({
+    "messages": [
+      {
+          "role": "system",
+          "content": 
+          `You are responsible to create a short and precise Job Description
+          based on the input data, which will contain information regarding job post.
+          Keep it simple in JSON format in such format {description: "your output"}, 
+          dont create the description in markdown format.
+          It is mandatory to have json output. Explain the Job role and responsibilities,
+          so that the candidate would understand properly.
+          `
+      },
+      {
+        "role": "user",
+        "content": `Job details : ${JSON.stringify(data)}`
+      }
+    ],
+    "model": "openai/gpt-oss-120b",
+    "temperature": 1,
+    "max_completion_tokens": 1000,
+    "top_p": 1,
+    "stream": true,
+    "reasoning_effort": "medium",
+    "stop": null
+  });
+
+  let result = ""
+  for await (const chunk of chatCompletion) {
+     result += chunk.choices[0]?.delta?.content || '';
+  }
+
+  return result
+} 
+
+// Example Usage
+
+// let response = await generate_description(input)
+// console.log(JSON.parse(response))
+
+
 
