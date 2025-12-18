@@ -112,14 +112,14 @@ node example.js
 | jobTitle | String | Yes | Job position title |
 | department | String | Yes | Department or team |
 | jobType | String | Yes | Employment type (e.g., Full Time, Part Time) |
-| payRange | String | No | Salary range |
-| location | String | No | Job location |
-| experienceRequired | String | No | Years/type of experience needed |
-| qualification | String | No | Required qualifications |
-| specialization | String | No | Job specialization |
-| urgency | String | No | Hiring urgency level |
-| inPersonInterview | Boolean | No | Whether in-person interview is required |
-| physicalInterview | Boolean | No | Whether physical presence is required |
+| payRange | String | Yes | Salary range |
+| location | String | Yes | Job location |
+| experienceRequired | String | Yes | Years/type of experience needed |
+| qualification | String | Yes | Required qualifications |
+| specialization | String | Yes | Job specialization |
+| urgency | String | Yes | Hiring urgency level |
+| inPersonInterview | Boolean | Yes | Whether in-person interview is required |
+| physicalInterview | Boolean | Yes | Whether physical presence is required |
 
 ## Configuration
 
